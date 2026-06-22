@@ -1,0 +1,48 @@
+---
+// Marquee.astro
+---
+
+<section class="marquee" style="overflow: hidden; padding: 30px 0; background: var(--c-bg-alt); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);">
+  <div class="mq-track" style="display: flex; align-items: center; gap: 48px; white-space: nowrap; width: max-content;">
+    <!-- We repeat the text multiple times to ensure seamless infinite scrolling -->
+    <span>PRECISION AT EVERY SCALE</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>ZERO DEVIATION TOLERANCE</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>15 YEARS FIELD EXPERIENCE</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>GOVERNMENT FMB EXPERTS</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>PRECISION AT EVERY SCALE</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>ZERO DEVIATION TOLERANCE</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>15 YEARS FIELD EXPERIENCE</span>
+    <span style="color: var(--c-gold);">•</span>
+    <span>GOVERNMENT FMB EXPERTS</span>
+    <span style="color: var(--c-gold);">•</span>
+  </div>
+</section>
+
+<style>
+  .mq-track {
+    animation: mq 32s linear infinite;
+  }
+  .marquee:hover .mq-track {
+    animation-play-state: paused;
+  }
+  .mq-track span {
+    font-family: var(--f-disp);
+    font-weight: 700;
+    font-size: clamp(26px, 3.4vw, 42px);
+    line-height: 1;
+    color: var(--c-paper);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  @keyframes mq {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

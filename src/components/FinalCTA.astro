@@ -1,0 +1,118 @@
+---
+// FinalCTA.astro
+---
+
+<section id="contact" style="background: var(--c-bg); border-top: 1px solid var(--c-border); padding: 130px 0; overflow: hidden; position: relative;">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 4vw; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 6vw; align-items: flex-start;">
+    
+    <div>
+      <h2 style="font-family: var(--f-disp); font-size: clamp(48px, 7vw, 104px); line-height: 0.92; color: var(--c-paper); font-weight: 700; max-width: 9ch;">
+        Tell us where <br/><span style="color: var(--c-gold);">your site is.</span>
+      </h2>
+      <p style="margin-top: 32px; color: var(--c-t2); font-size: 18px; max-width: 34ch; line-height: 1.6;">
+        Send an enquiry to check availability and get an exact quote. Most surveys can be scheduled for the very next morning.
+      </p>
+      
+      <div style="display: flex; align-items: center; gap: 24px; margin-top: 48px; flex-wrap: wrap;">
+        <div style="font-size: 15px; color: var(--c-t2);">
+          Or call us directly at <br/>
+          <a href="tel:+918072807474" style="color: var(--c-paper); font-weight: 700; text-decoration: underline; text-underline-offset: 4px; font-size: 18px;">+91 80728 07474</a>
+        </div>
+      </div>
+    </div>
+    
+    <div style="background: var(--c-bg-alt); border: 1px solid var(--c-border); padding: 40px; position: relative;">
+      <div class="mono" style="color: var(--c-gold); margin-bottom: 24px; font-size: 13px;">/ INITIATE ENQUIRY</div>
+      
+      <form id="enquiryForm" onsubmit="event.preventDefault();" style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input type="text" name="name" placeholder="Your Name" required class="ff-input" />
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input type="tel" name="phone" placeholder="Phone Number" required class="ff-input" />
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <select name="service" required class="ff-input" style="cursor: pointer; appearance: none;">
+            <option value="" disabled selected>Select Service Required</option>
+            <option value="Land survey">Land survey & boundary fixing</option>
+            <option value="FMB Sketch">FMB Sketch for Bank/Registration</option>
+            <option value="Construction marking">Construction column/pile marking</option>
+            <option value="Topographic">Topographical survey</option>
+            <option value="Other">Other technical service</option>
+          </select>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <textarea name="message" placeholder="Location, plot size, or any specific details..." rows="3" class="ff-input" style="resize: vertical; min-height: 80px;"></textarea>
+        </div>
+        
+        <button id="ffSubmit" type="submit" style="width: 100%; background: var(--c-gold); color: var(--c-bg); font-family: var(--f-body); font-weight: 700; font-size: 16px; padding: 18px; border: none; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s;">
+          SEND VIA WHATSAPP
+        </button>
+        
+        <p style="font-size: 13px; color: var(--c-t3); margin-top: 8px; text-align: center;">
+          This will open WhatsApp with your details pre-filled.
+        </p>
+      </form>
+    </div>
+    
+  </div>
+</section>
+
+<style>
+  .ff-input {
+    width: 100%;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    color: var(--c-paper);
+    font-family: var(--f-body);
+    font-size: 15px;
+    padding: 16px;
+    transition: border-color 0.2s;
+  }
+  .ff-input::placeholder {
+    color: var(--c-t3);
+  }
+  .ff-input:focus {
+    outline: none;
+    border-color: var(--c-gold);
+  }
+  
+  #ffSubmit:hover {
+    background: #f5c500;
+    transform: translateY(-2px);
+  }
+
+  @media(max-width: 1024px) {
+    div[style*="grid-template-columns: 1.05fr"] {
+      grid-template-columns: 1fr !important;
+      gap: 48px !important;
+    }
+  }
+</style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const form = document.getElementById('enquiryForm') as HTMLFormElement;
+    const btn = document.getElementById('ffSubmit');
+    if (btn && form) {
+      btn.addEventListener('click', () => {
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const n = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+        const p = (form.elements.namedItem('phone') as HTMLInputElement).value.trim();
+        const s = (form.elements.namedItem('service') as HTMLSelectElement).value;
+        const m = (form.elements.namedItem('message') as HTMLTextAreaElement).value.trim();
+        
+        let text = 'Hi GV Modern Surveyors, I would like to enquire.%0A%0AName: ' + encodeURIComponent(n) + '%0APhone: ' + encodeURIComponent(p) + '%0AService: ' + encodeURIComponent(s);
+        if (m) text += '%0ADetails: ' + encodeURIComponent(m);
+        
+        window.open('https://wa.me/918072807474?text=' + text, '_blank');
+      });
+    }
+  }
+</script>

@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+
+import '../styles/global.css';
+
+const PROJECTS = [
+  {
+    id: 'PRJ-01',
+    name: 'NH-45 Highway Expansion Alignment',
+    client: 'L&T Construction',
+    area: '42 km Stretch',
+    type: 'DGPS & Topography',
+    img: 'https://picsum.photos/id/1015/1200/800'
+  },
+  {
+    id: 'PRJ-02',
+    name: 'Olympia Tech Park Phase III',
+    client: 'Olympia Group',
+    area: '12 Acres',
+    type: 'Column Layout Marking',
+    img: 'https://picsum.photos/id/1016/1200/800'
+  },
+  {
+    id: 'PRJ-03',
+    name: 'Mahindra World City Sub-division',
+    client: 'Mahindra Lifespaces',
+    area: '150 Acres',
+    type: 'Boundary Demarcation',
+    img: 'https://picsum.photos/id/1018/1200/800'
+  },
+  {
+    id: 'PRJ-04',
+    name: 'OMR IT Corridor Commercial Hub',
+    client: 'Brigade Group',
+    area: '5.2 Acres',
+    type: 'Contour Mapping',
+    img: 'https://picsum.photos/id/1019/1200/800'
+  }
+];
+---
+
+<Layout title="Projects | GV Modern Surveyors">
+	<Navigation />
+	<main style="padding-top: 80px;">
+        
+    <section style="padding: 120px 0; border-bottom: 1px solid var(--c-border); background: var(--c-bg);">
+      <div class="wrap">
+        <div class="mono" style="color: var(--c-gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+          / FIELD EVIDENCE
+          <span style="display: block; width: 80px; height: 1px; background: var(--c-border);"></span>
+        </div>
+        <h1 style="font-family: var(--f-disp); font-size: clamp(48px, 8vw, 120px); color: var(--c-paper); font-weight: 800; line-height: 0.9; margin-bottom: 40px; text-transform: uppercase;">
+          Project<br/>Logs
+        </h1>
+        <p style="font-size: 18px; color: var(--c-t2); max-width: 48ch; line-height: 1.6;">
+          From 150-acre industrial sub-divisions to millimeter-perfect high-rise column layouts, we have delivered critical measurement data for South India's largest builders.
+        </p>
+      </div>
+    </section>
+
+    <section style="background: var(--c-bg-alt); padding: 80px 0;">
+      <div class="wrap">
+        <div class="prj-grid">
+          {PROJECTS.map((prj) => (
+            <div class="prj-card">
+              <div class="prj-img-wrap">
+                <img src={prj.img} alt={prj.name} loading="lazy" />
+                <div class="prj-overlay"></div>
+              </div>
+              <div class="prj-info">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <span class="mono" style="color: var(--c-gold);">{prj.id}</span>
+                  <span class="mono" style="color: var(--c-t3);">{prj.type}</span>
+                </div>
+                <h3 style="font-size: 24px; color: var(--c-paper); margin-bottom: 12px;">{prj.name}</h3>
+                <div style="display: flex; gap: 16px; font-size: 14px; color: var(--c-t2);">
+                  <span><strong>Client:</strong> {prj.client}</span>
+                  <span><strong>Scale:</strong> {prj.area}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <FinalCTA />
+	</main>
+  <Footer />
+</Layout>
+
+<style>
+  .prj-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  .prj-card {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    transition: border-color 0.3s;
+    cursor: crosshair;
+  }
+  .prj-card:hover {
+    border-color: var(--c-gold);
+  }
+  .prj-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .prj-img-wrap img {
+    position: absolute;
+    top: -15%;
+    left: 0;
+    width: 100%;
+    height: 130%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.7) contrast(1.2);
+    transition: transform 0.8s var(--ease), filter 0.5s var(--ease);
+  }
+  .prj-card:hover .prj-img-wrap img {
+    transform: scale(1.04);
+    filter: grayscale(0) brightness(1) contrast(1);
+  }
+  .prj-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(224,165,38,0.05), rgba(10,24,40,0.4));
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .prj-card:hover .prj-overlay {
+    opacity: 0;
+  }
+  .prj-info {
+    padding: 32px;
+  }
+
+  @media(max-width: 900px) {
+    .prj-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.fromTo('.wrap h1', 
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
+    );
+    gsap.fromTo('.wrap p', 
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.4 }
+    );
+
+    const cards = gsap.utils.toArray('.prj-card');
+    cards.forEach((card: any) => {
+      // Entry Reveal
+      gsap.fromTo(card,
+        { y: 80, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+        }
+      );
+
+      // Parallax Image
+      const img = card.querySelector('img');
+      if(img) {
+        gsap.to(img, {
+          yPercent: 15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+    });
+  }
+</script>

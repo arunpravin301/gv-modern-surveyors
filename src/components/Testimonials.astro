@@ -1,0 +1,242 @@
+---
+// Testimonials.astro
+---
+
+<section id="testimonials" class="trust gsap-fade-up" style="opacity: 0;">
+  <div class="inner">
+    <div class="mono label-row">
+      / 04 IN THEIR WORDS
+      <span class="label-line"></span>
+    </div>
+    <p class="trust-intro">Real words from real sites. We'll publish these as our clients send them in.</p>
+  </div>
+  
+  <div class="stagger-wrap">
+    <div class="stagger-stage" id="staggerStage" aria-label="Client testimonials">
+      <!-- cards injected by JS -->
+    </div>
+    <div class="stagger-nav">
+      <button id="stPrev" aria-label="Previous testimonial">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      </button>
+      <button id="stNext" aria-label="Next testimonial">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </button>
+    </div>
+  </div>
+  
+  <div class="inner">
+    <p class="logos-label">TRUSTED BY BUILDERS, CONTRACTORS AND DESIGN STUDIOS</p>
+  </div>
+  <div class="logos-marquee" aria-label="Client logos">
+    <div class="logos-track" id="logosTrack">
+      <div class="logo-box"><span>JAYAVEL FOUNDATIONS</span></div>
+      <div class="logo-box"><span>P. MANICKAM & CO</span></div>
+      <div class="logo-box"><span>RESURGENCE BUILDCORP</span></div>
+      <div class="logo-box"><span>SICAL</span></div>
+      <div class="logo-box"><span>SRISHTI DESIGN STUDIO</span></div>
+      <div class="logo-box"><span>OCEAN INTERIORS</span></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="logo-box"><span>JAYAVEL FOUNDATIONS</span></div>
+      <div class="logo-box"><span>P. MANICKAM & CO</span></div>
+      <div class="logo-box"><span>RESURGENCE BUILDCORP</span></div>
+      <div class="logo-box"><span>SICAL</span></div>
+      <div class="logo-box"><span>SRISHTI DESIGN STUDIO</span></div>
+      <div class="logo-box"><span>OCEAN INTERIORS</span></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust { padding: 130px 0 110px; background: var(--c-bg); border-top: 1px solid var(--c-border); }
+  .trust .inner { padding: 0 4vw; max-width: 1400px; margin: 0 auto; }
+  .label-row { color: var(--c-gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .label-line { display: block; width: 80px; height: 1px; background: var(--c-border); }
+  .trust-intro { font-size: 17px; color: var(--c-t2); max-width: 46ch; margin-bottom: 20px; }
+
+  .stagger-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 600px;
+    background: var(--c-bg-alt);
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
+    margin-top: 40px;
+  }
+  .stagger-stage { position: absolute; inset: 0; }
+
+  /* card: exact clip from original source — chamfer top-right only */
+  /* Using global styling because JS will inject these classes */
+  :global(.st-card) {
+    position: absolute; left: 50%; top: 50%;
+    width: 365px; height: 365px;
+    cursor: pointer; border: 2px solid; padding: 32px;
+    clip-path: polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0);
+    transition: transform 500ms ease-in-out, background 500ms ease-in-out, border-color 500ms ease-in-out, box-shadow 500ms ease-in-out, color 500ms ease-in-out;
+  }
+  :global(.st-card.is-center) {
+    z-index: 10; background: var(--c-bg); border-color: var(--c-gold); color: var(--c-paper);
+    box-shadow: 0px 8px 0px 4px var(--c-gold);
+  }
+  :global(.st-card.is-side) {
+    z-index: 0; background: var(--c-bg-alt); border-color: var(--c-border); color: var(--c-t2);
+    box-shadow: none;
+  }
+  
+  :global(.st-card .cut) {
+    position: absolute; display: block; right: -2px; top: 48px; width: 70.71px; height: 2px;
+    transform-origin: top right; transform: rotate(45deg);
+    transition: background 500ms ease-in-out;
+  }
+  :global(.st-card.is-center .cut) { background: var(--c-gold); }
+  :global(.st-card.is-side .cut) { background: var(--c-border); }
+
+  :global(.st-card .av-init) {
+    width: 48px; height: 56px; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--f-disp); font-weight: 800; font-size: 18px;
+    transition: background 500ms ease-in-out, color 500ms ease-in-out;
+  }
+  :global(.st-card.is-center .av-init) { background: var(--c-gold); color: var(--c-bg); }
+  :global(.st-card.is-side .av-init) { background: var(--c-border); color: var(--c-bg); }
+
+  :global(.st-card .qt) { font-size: 18px; font-weight: 500; line-height: 1.42; margin: 0; }
+  
+  :global(.st-card .by-line) {
+    position: absolute; bottom: 32px; left: 32px; right: 32px;
+    font-size: 13px; font-style: italic; margin: 0;
+  }
+  :global(.st-card.is-center .by-line) { color: var(--c-t3); }
+  :global(.st-card.is-side .by-line) { color: var(--c-t2); }
+
+  :global(.st-card .pend-badge) {
+    position: absolute; top: 28px; right: 28px;
+    font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--c-gold); opacity: 0.7;
+  }
+
+  .stagger-nav {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 12px; z-index: 20;
+  }
+  .stagger-nav button {
+    width: 56px; height: 56px; border: 1px solid var(--c-gold); background: var(--c-bg);
+    color: var(--c-gold); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, color 0.2s;
+  }
+  .stagger-nav button:hover { background: var(--c-gold); color: var(--c-bg); }
+
+  .logos-label {
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--c-t2); margin-top: 40px; margin-bottom: 24px;
+  }
+  .logos-marquee {
+    overflow: hidden; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);
+    padding: 24px 0;
+  }
+  .logos-track {
+    display: flex; align-items: center; gap: 60px; width: max-content;
+    animation: logosScroll 32s linear infinite;
+  }
+  .logos-marquee:hover .logos-track { animation-play-state: paused; }
+  @keyframes logosScroll { to { transform: translateX(-50%); } }
+
+  .logo-box {
+    display: flex; align-items: center; justify-content: center;
+    height: 54px; min-width: 180px; padding: 0 28px;
+    border: 1px solid var(--c-border); background: var(--c-bg-alt);
+  }
+  .logo-box span {
+    font-family: var(--f-disp); font-weight: 700; font-size: 17px;
+    letter-spacing: 0.02em; color: var(--c-t3); white-space: nowrap;
+  }
+</style>
+
+<script>
+  /* Staggered Testimonial Carousel — Vanilla JS port */
+  (function(){
+    var stage = document.getElementById('staggerStage');
+    if (!stage) return;
+  
+    var CARD_DEF = 365, CARD_SM = 290;
+    var cardSize = window.matchMedia('(min-width:640px)').matches ? CARD_DEF : CARD_SM;
+  
+    var items = [
+      {id:0, quote:'Real client testimonial will appear here. Their own words, in their voice, about a specific survey we completed.', by:'Client name, company', pending:true},
+      {id:1, quote:'A second real testimonial. Short and specific. We publish exactly what the client writes.', by:'Client name, company', pending:true},
+      {id:2, quote:'Third testimonial placeholder. Will be replaced with real words from a real site visit.', by:'Client name, company', pending:true},
+      {id:3, quote:'Fourth placeholder. The carousel fits as many testimonials as the client sends.', by:'Client name, company', pending:true},
+      {id:4, quote:'Fifth placeholder. Every card here represents a completed survey and a satisfied client.', by:'Client name, company', pending:true},
+      {id:5, quote:'Sixth testimonial placeholder. Arrows and click-to-center both work once real quotes arrive.', by:'Client name, company', pending:true},
+      {id:6, quote:'Seventh placeholder. Waiting on client to deliver real testimonials before launch.', by:'Client name, company', pending:true},
+      {id:7, quote:'Eighth placeholder. Add more objects to the items array to grow the deck.', by:'Client name, company', pending:true},
+      {id:8, quote:'Ninth placeholder. An odd number of cards keeps the deck visually symmetric.', by:'Client name, company', pending:true}
+    ];
+  
+    /* Build DOM nodes once; keep them alive forever */
+    var nodes = items.map(function(it) {
+      var el = document.createElement('div');
+      el.className = 'st-card';
+      var avHtml = '<div class="av-init">' + (it.by.trim()[0] || 'G').toUpperCase() + 'V</div>';
+      el.innerHTML =
+        '<span class="cut"></span>' +
+        avHtml +
+        (it.pending ? '<span class="pend-badge">Pending</span>' : '') +
+        '<p class="qt">“' + it.quote + '”</p>' +
+        '<p class="by-line">- ' + it.by + '</p>';
+      stage.appendChild(el);
+      return el;
+    });
+  
+    /* list[i] = which data item index is at visual slot i */
+    var list = items.map(function(_, i){ return i; });
+  
+    function positionOf(index) {
+      /* always center the middle card: position 0 = visual center.
+         For 9 cards this gives -4..0..+4, perfectly symmetric. */
+      return index - Math.floor(list.length / 2);
+    }
+  
+    function applyPositions() {
+      list.forEach(function(itemIdx, index) {
+        var pos   = positionOf(index);
+        var isCenter = pos === 0;
+        var el    = nodes[itemIdx];
+        var ty    = isCenter ? -65 : (pos % 2 ? 15 : -15);
+        var rot   = isCenter ? 0   : (pos % 2 ? 2.5 : -2.5);
+        var tx    = (cardSize / 1.5) * pos;
+        /* mutate class so CSS transitions fire (element stays in DOM) */
+        el.className  = 'st-card ' + (isCenter ? 'is-center' : 'is-side');
+        el.style.width  = cardSize + 'px';
+        el.style.height = cardSize + 'px';
+        el.style.zIndex = isCenter ? "10" : "0";
+        el.style.transform =
+          'translate(-50%,-50%) ' +
+          'translateX(' + tx + 'px) ' +
+          'translateY(' + ty + 'px) ' +
+          'rotate(' + rot + 'deg)';
+        el.onclick = isCenter ? null : (function(p){ return function(){ move(p); }; })(pos);
+      });
+    }
+  
+    function move(steps) {
+      if (steps > 0) {
+        for (var i = 0; i < steps; i++) list.push(list.shift());
+      } else {
+        for (var j = 0; j > steps; j--) list.unshift(list.pop());
+      }
+      applyPositions();
+    }
+  
+    document.getElementById('stPrev').addEventListener('click', function(){ move(-1); });
+    document.getElementById('stNext').addEventListener('click', function(){ move(1); });
+  
+    window.addEventListener('resize', function(){
+      var ns = window.matchMedia('(min-width:640px)').matches ? CARD_DEF : CARD_SM;
+      if (ns !== cardSize) { cardSize = ns; applyPositions(); }
+    });
+  
+    applyPositions();
+  })();
+  </script>

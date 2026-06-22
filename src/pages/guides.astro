@@ -1,0 +1,165 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+
+import '../styles/global.css';
+
+const GUIDES = [
+  {
+    category: 'FMB',
+    readTime: '5 MIN READ',
+    title: 'What is an FMB sketch, and why does the bank ask for it?',
+    excerpt: 'Before approving a housing loan, banks demand an FMB sketch. Here is a breakdown of what this document is, where to get it, and how surveyors prepare it.'
+  },
+  {
+    category: 'LAND SURVEY',
+    readTime: '4 MIN READ',
+    title: 'Documents you need before a land survey in Tamil Nadu',
+    excerpt: 'A surveyor cannot measure land effectively without the right paper trail. Learn exactly what documents (Patta, Chitta, Sale Deed) you must keep ready.'
+  },
+  {
+    category: 'PRICING',
+    readTime: '6 MIN READ',
+    title: 'How much does a land survey cost in Chennai?',
+    excerpt: 'A transparent breakdown of the costs involved in boundary fixing, topographical surveys, and sub-divisions, including total station daily rental rates.'
+  },
+  {
+    category: 'CONSTRUCTION',
+    readTime: '4 MIN READ',
+    title: 'Why manual column marking is costing builders lakhs',
+    excerpt: 'Tape measure layouts often result in column deviations. Discover why top builders have entirely shifted to Total Station column grid marking.'
+  }
+];
+---
+
+<Layout title="Guides | GV Modern Surveyors">
+	<Navigation />
+	<main style="padding-top: 80px;">
+        
+    <section style="padding: 120px 0; border-bottom: 1px solid var(--c-border); background: var(--c-bg);">
+      <div class="wrap">
+        <div class="mono" style="color: var(--c-gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+          / KNOWLEDGE BASE
+          <span style="display: block; width: 80px; height: 1px; background: var(--c-border);"></span>
+        </div>
+        <h1 style="font-family: var(--f-disp); font-size: clamp(48px, 8vw, 120px); color: var(--c-paper); font-weight: 800; line-height: 0.9; margin-bottom: 40px; text-transform: uppercase;">
+          Technical<br/>Guides
+        </h1>
+        <p style="font-size: 18px; color: var(--c-t2); max-width: 48ch; line-height: 1.6;">
+          Everything you need to know about land measurement, property documents in Tamil Nadu, and construction layout engineering.
+        </p>
+      </div>
+    </section>
+
+    <section style="background: var(--c-bg-alt); padding: 80px 0;">
+      <div class="wrap" style="max-width: 1000px;">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          {GUIDES.map((guide) => (
+            <a href="#" class="guide-row">
+              <div class="guide-meta">
+                <span style="color: var(--c-gold);">{guide.category}</span>
+                <span>{guide.readTime}</span>
+              </div>
+              <div class="guide-content">
+                <h2 style="font-size: 24px; color: var(--c-paper); margin-bottom: 16px;">{guide.title}</h2>
+                <p style="color: var(--c-t2); font-size: 16px; line-height: 1.6;">{guide.excerpt}</p>
+              </div>
+              <div class="read-arr">→</div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <FinalCTA />
+	</main>
+  <Footer />
+</Layout>
+
+<style>
+  .guide-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 60px;
+    gap: 40px;
+    align-items: center;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    padding: 40px;
+    text-decoration: none;
+    transition: transform 0.3s var(--ease), border-color 0.3s, background 0.3s;
+  }
+  .guide-row:hover {
+    transform: translateY(-4px);
+    border-color: var(--c-gold);
+    background: #0D1624;
+  }
+  .guide-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--c-t3);
+  }
+  .read-arr {
+    font-family: var(--f-mono);
+    font-size: 24px;
+    color: var(--c-t3);
+    text-align: right;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .guide-row:hover .read-arr {
+    color: var(--c-gold);
+    transform: translateX(8px);
+  }
+
+  @media(max-width: 768px) {
+    .guide-row {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 32px 24px;
+    }
+    .guide-meta {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .read-arr {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.fromTo('.wrap h1', 
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
+    );
+    gsap.fromTo('.wrap p', 
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.4 }
+    );
+
+    const rows = gsap.utils.toArray('.guide-row');
+    rows.forEach((row: any) => {
+      gsap.fromTo(row,
+        { x: -40, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: row,
+            start: 'top 90%'
+          }
+        }
+      );
+    });
+  }
+</script>

@@ -1,0 +1,265 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+
+import '../styles/global.css';
+
+const SERVICES = [
+  {
+    id: 'SV.01',
+    cat: 'MAPPING',
+    title: 'Topographical Survey',
+    desc: 'A topographical survey is a detailed mapping of land or a site, capturing natural and man-made features like slopes, buildings, and rivers. It helps engineers, architects, and planners make informed decisions for their projects by providing precise information about the terrain and its characteristics.'
+  },
+  {
+    id: 'SV.02',
+    cat: 'ENGINEERING',
+    title: 'Building Setting Out Work',
+    desc: "Building setting out work is about transferring a building's design from paper to the actual construction site. It's the process of marking where walls, columns, foundations, and other parts should go, following the design plans. This precision work is done by a land surveyor or setting out engineer using surveying tools to make sure everything lines up with the design."
+  },
+  {
+    id: 'SV.03',
+    cat: 'INFRASTRUCTURE',
+    title: 'Road Survey',
+    desc: 'In road surveying, we provide various services to support the design, construction, and maintenance of roads. Some of the key services we offer include Route and Alignment Survey, Control Point Establishment, Topographic Data Collection, Right-of-Way Determination, Utility Location, Cross-Sectional Surveys, and As-Built Surveys.'
+  },
+  {
+    id: 'SV.04',
+    cat: 'TERRAIN',
+    title: 'Hills Survey',
+    desc: 'Surveying in hilly areas is tricky due to the uneven land and steep slopes. To handle this, surveyors use special methods and tools, such as Contour Mapping, Slope Measurements, Ensuring Access and Safety, Differential GPS (DGPS) or Total Stations, and Laser Scanning.'
+  },
+  {
+    id: 'SV.05',
+    cat: 'INFRASTRUCTURE',
+    title: 'Highway Survey',
+    desc: 'A highway survey is a comprehensive process that involves gathering precise data and mapping the alignment, features, and characteristics of a highway or major roadway. The main objectives include Alignment Survey, Topographic Mapping, Right-of-Way Determination, Geometric Data Collection, Utility Mapping, Traffic Surveys, Cross-Sectional Surveys, Pavement Condition Assessment, and As-Built Surveys.'
+  },
+  {
+    id: 'SV.06',
+    cat: 'RECORDS',
+    title: 'FMB Survey',
+    desc: 'An FMB, or Field Measurement Book, is a record-keeping document in surveying. It records measurements and observations made during a survey, including distances, angles, elevations, and other important data. This record helps in future analysis and map creation based on survey data.'
+  },
+  {
+    id: 'SV.07',
+    cat: 'TERRAIN',
+    title: 'Contour Survey',
+    desc: 'Detailed mapping of land elevation changes and terrain profiles. We generate high-precision contour lines to help architects, structural engineers, and hydrologists understand water flow, slope stability, and earthwork (cut and fill) calculations prior to major construction.'
+  },
+  {
+    id: 'SV.08',
+    cat: 'UTILITIES',
+    title: 'Pipeline Survey',
+    desc: "Pipeline surveying is a specialized field that maps and plans pipelines for things like oil, gas, or water transport. It ensures the pipeline's route and features are accurate for safe and efficient use. Includes Route Selection, Preliminary Surveys, Right-of-Way Survey, Alignment Survey, Construction Staking, Pavement Condition Assessment, and As-Built Surveys."
+  },
+  {
+    id: 'SV.09',
+    cat: 'ENGINEERING',
+    title: 'Layout Design & Marking',
+    desc: "Layout design and marking is all about planning and marking the exact positions of things on the ground or in a specific area. It's important to make sure everything is placed correctly during construction, installation, or other tasks. This process is vital in fields like construction, engineering, architecture, and manufacturing."
+  },
+  {
+    id: 'SV.10',
+    cat: 'MANAGEMENT',
+    title: 'Quantity Survey',
+    desc: 'Quantity Surveying focuses on managing construction project costs. It involves tasks like cost estimation, planning, value analysis, and more. Quantity surveyors aim to use resources efficiently and need to stay updated on market trends and tools for effective project planning and resource allocation.'
+  },
+  {
+    id: 'SV.11',
+    cat: 'ADVANCED',
+    title: 'DGPS Survey & Drawing Works',
+    desc: 'DGPS combines receivers and satellites to enhance GPS accuracy by reducing or eliminating errors like orbit, ionospheric, tropospheric, and clock errors. It offers much higher precision than regular GPS, making it ideal for projects demanding precise Earth surface positioning and mapping.'
+  }
+];
+---
+
+<Layout title="Services | GV Modern Surveyors">
+	<Navigation />
+	<main style="padding-top: 80px;">
+        
+    <section style="padding: 120px 0; border-bottom: 1px solid var(--c-border); background: var(--c-bg);">
+      <div class="wrap">
+        <div class="mono" style="color: var(--c-gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+          / CAPABILITIES
+          <span style="display: block; width: 80px; height: 1px; background: var(--c-border);"></span>
+        </div>
+        <h1 style="font-family: var(--f-disp); font-size: clamp(48px, 8vw, 120px); color: var(--c-paper); font-weight: 800; line-height: 0.9; margin-bottom: 40px; text-transform: uppercase;">
+          Technical<br/>Services
+        </h1>
+        <p style="font-size: 18px; color: var(--c-t2); max-width: 48ch; line-height: 1.6;">
+          Equipped with robotic total stations and dual-frequency DGPS rovers, we provide millimeter-accurate surveys across 11 distinct disciplines.
+        </p>
+      </div>
+    </section>
+
+    <section style="background: var(--c-bg-alt); position: relative;">
+      <div class="wrap" style="padding-top: 80px; padding-bottom: 80px;">
+        
+        <div class="svc-layout">
+          <aside class="svc-sidebar">
+            <div class="svc-sticky">
+              <div class="mono" style="color: var(--c-gold); margin-bottom: 24px;">/ INDEX</div>
+              <ul class="svc-index">
+                {SERVICES.map((svc) => (
+                  <li>
+                    <a href={`#${svc.id.replace('.','-')}`} class="svc-link" data-id={svc.id.replace('.','-')}>
+                      <span class="mono" style="font-size: 11px; margin-right: 8px;">{svc.id}</span>
+                      {svc.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+
+          <div class="svc-content">
+            {SERVICES.map((svc) => (
+              <div id={svc.id.replace('.','-')} class="svc-card">
+                <div class="svc-meta">
+                  <span class="mono" style="color: var(--c-gold);">{svc.id}</span>
+                  <span class="mono" style="color: var(--c-t3);">{svc.cat}</span>
+                </div>
+                <div class="svc-body">
+                  <h2 style="font-size: clamp(32px, 4vw, 48px); margin-bottom: 20px;">{svc.title}</h2>
+                  <p style="color: var(--c-t2); font-size: 17px; line-height: 1.6; margin-bottom: 32px;">
+                    {svc.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <FinalCTA />
+	</main>
+  <Footer />
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  .svc-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 6vw;
+    align-items: start;
+  }
+  .svc-sticky {
+    position: sticky;
+    top: 120px;
+  }
+  .svc-index {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .svc-link {
+    display: flex;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--c-t2);
+    font-size: 15px;
+    padding: 10px 12px;
+    border-left: 2px solid var(--c-border);
+    transition: all 0.2s var(--ease);
+  }
+  .svc-link:hover {
+    color: var(--c-paper);
+    border-left-color: var(--c-t3);
+  }
+  .svc-link.active {
+    color: var(--c-gold);
+    border-left-color: var(--c-gold);
+    background: rgba(224, 165, 38, 0.05);
+  }
+
+  .svc-card {
+    padding: 0 0 100px 0;
+    border-bottom: 1px solid var(--c-border);
+    margin-bottom: 100px;
+    scroll-margin-top: 120px;
+  }
+  .svc-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .svc-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .svc-body {
+    max-width: 800px;
+  }
+
+  @media(max-width: 900px) {
+    .svc-layout {
+      grid-template-columns: 1fr;
+    }
+    .svc-sticky {
+      position: relative;
+      top: 0;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--c-border);
+      padding-bottom: 40px;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero Animation
+    gsap.fromTo('.wrap h1', 
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 }
+    );
+    gsap.fromTo('.wrap p', 
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.4 }
+    );
+
+    // ScrollSpy & Card Reveals
+    const cards = gsap.utils.toArray('.svc-card');
+    const links = document.querySelectorAll('.svc-link');
+
+    cards.forEach((card: any) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top center',
+        end: 'bottom center',
+        onToggle: (self) => {
+          if (self.isActive) {
+            links.forEach(l => l.classList.remove('active'));
+            const activeLink = document.querySelector(`.svc-link[data-id="${card.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+          }
+        }
+      });
+
+      gsap.fromTo(card,
+        { y: 60, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%'
+          }
+        }
+      );
+    });
+  }
+</script>

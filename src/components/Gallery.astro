@@ -1,0 +1,117 @@
+---
+// Gallery.astro
+---
+
+<section id="projects" style="padding: 130px 0; background: var(--c-bg); border-top: 1px solid var(--c-border); position: relative;">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 4vw;">
+    <div class="mono" style="color: var(--c-gold); margin-bottom: 52px; display: flex; align-items: center; gap: 12px;">
+      / 03 FIELD EVIDENCE
+      <span style="display: block; width: 80px; height: 1px; background: var(--c-border);"></span>
+    </div>
+  </div>
+  
+  <div class="gal-grid gsap-stagger-container">
+    <div class="gal-item g-a gsap-stagger-item" style="opacity: 0;">
+      <img src="https://picsum.photos/id/1015/700/500" alt="Boundary survey site" loading="lazy" />
+      <div class="gal-cap">Boundary fixing<span class="gal-coord">12.9981° N · 80.0742° E</span></div>
+    </div>
+    <div class="gal-item g-b gsap-stagger-item" style="opacity: 0;">
+      <img src="https://picsum.photos/id/1036/900/500" alt="Construction marking site" loading="lazy" />
+      <div class="gal-cap">Construction marking<span class="gal-coord">13.0145° N · 80.1203° E</span></div>
+    </div>
+    <div class="gal-item g-c gsap-stagger-item" style="opacity: 0;">
+      <img src="https://picsum.photos/id/1019/600/450" alt="Topographic survey" loading="lazy" />
+      <div class="gal-cap">Topographic survey<span class="gal-coord">12.9456° N · 79.9912° E</span></div>
+    </div>
+    <div class="gal-item g-d gsap-stagger-item" style="opacity: 0;">
+      <img src="https://picsum.photos/id/1016/600/450" alt="Road survey" loading="lazy" />
+      <div class="gal-cap">Road survey<span class="gal-coord">13.0876° N · 80.2014° E</span></div>
+    </div>
+    <div class="gal-item g-e gsap-stagger-item" style="opacity: 0;">
+      <img src="https://picsum.photos/id/1039/600/450" alt="DGPS survey" loading="lazy" />
+      <div class="gal-cap">DGPS survey<span class="gal-coord">12.8834° N · 80.0521° E</span></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gal-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4vw;
+  }
+  .gal-item {
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+  }
+  .gal-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.7) contrast(1.2);
+    transition: transform 0.8s var(--ease), filter 0.5s var(--ease);
+  }
+  .gal-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(224,165,38,0.05), rgba(10,24,40,0.4));
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .gal-item:hover img {
+    transform: scale(1.04);
+    filter: grayscale(0) brightness(1) contrast(1);
+  }
+  .gal-item:hover::after {
+    opacity: 0;
+  }
+  .gal-cap {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 2;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-paper);
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    padding: 8px 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .gal-item:hover .gal-cap {
+    opacity: 1;
+    transform: none;
+  }
+  .gal-coord {
+    display: block;
+    color: var(--c-gold);
+    margin-top: 4px;
+    font-size: 10px;
+  }
+  .g-a { grid-column: span 5; height: 400px; }
+  .g-b { grid-column: span 7; height: 400px; }
+  .g-c { grid-column: span 4; height: 320px; }
+  .g-d { grid-column: span 4; height: 320px; }
+  .g-e { grid-column: span 4; height: 320px; }
+
+  @media(max-width: 1024px) {
+    .g-a, .g-b { grid-column: span 6; height: 300px; }
+    .g-c, .g-d, .g-e { grid-column: span 4; height: 240px; }
+  }
+  @media(max-width: 768px) {
+    .gal-grid { grid-template-columns: 1fr; }
+    .g-a, .g-b, .g-c, .g-d, .g-e { grid-column: span 1; height: 260px; }
+    .gal-cap { opacity: 1; transform: none; }
+  }
+</style>
