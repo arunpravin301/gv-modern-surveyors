@@ -1,0 +1,84 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const guideEntries = await getCollection('guides');
+  return guideEntries.map(entry => ({
+    params: { slug: entry.id }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${entry.data.title} | GV Modern Surveyors`}>
+  <Navigation />
+  <main style="padding-top: 80px; min-height: 100vh;">
+    
+    <header style="padding: 120px 0 60px; border-bottom: 1px solid var(--c-border); background: var(--c-bg);">
+      <div class="wrap" style="max-width: 800px; margin: 0 auto;">
+        <a href="/guides" class="mono" style="color: var(--c-t3); text-decoration: none; font-size: 14px; margin-bottom: 40px; display: inline-block; transition: color 0.2s;">
+          ← BACK TO GUIDES
+        </a>
+        <div class="mono" style="color: var(--c-gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-size: 14px;">
+          {entry.data.category}
+          <span style="display: block; width: 40px; height: 1px; background: var(--c-border);"></span>
+          {entry.data.readTime}
+        </div>
+        <h1 style="font-family: var(--f-disp); font-size: clamp(36px, 5vw, 64px); color: var(--c-paper); font-weight: 800; line-height: 1.1; margin-bottom: 24px;">
+          {entry.data.title}
+        </h1>
+        <p style="font-size: 20px; color: var(--c-t2); line-height: 1.6;">
+          {entry.data.excerpt}
+        </p>
+      </div>
+    </header>
+
+    <article class="markdown-body" style="padding: 80px 0; background: var(--c-bg-alt);">
+      <div class="wrap" style="max-width: 800px; margin: 0 auto; color: var(--c-t2); font-size: 18px; line-height: 1.8;">
+        <Content />
+      </div>
+    </article>
+
+    <FinalCTA />
+  </main>
+  <Footer />
+</Layout>
+
+<style is:global>
+  .markdown-body h2 {
+    font-family: var(--f-disp);
+    font-size: 32px;
+    color: var(--c-paper);
+    margin: 48px 0 24px;
+    font-weight: 700;
+  }
+  .markdown-body h3 {
+    font-family: var(--f-disp);
+    font-size: 24px;
+    color: var(--c-paper);
+    margin: 32px 0 16px;
+    font-weight: 600;
+  }
+  .markdown-body p {
+    margin-bottom: 24px;
+  }
+  .markdown-body ul, .markdown-body ol {
+    margin-bottom: 24px;
+    padding-left: 24px;
+  }
+  .markdown-body li {
+    margin-bottom: 12px;
+  }
+  .markdown-body strong {
+    color: var(--c-paper);
+    font-weight: 600;
+  }
+</style>

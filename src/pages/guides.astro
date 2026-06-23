@@ -6,32 +6,10 @@ import FinalCTA from '../components/FinalCTA.astro';
 
 import '../styles/global.css';
 
-const GUIDES = [
-  {
-    category: 'FMB',
-    readTime: '5 MIN READ',
-    title: 'What is an FMB sketch, and why does the bank ask for it?',
-    excerpt: 'Before approving a housing loan, banks demand an FMB sketch. Here is a breakdown of what this document is, where to get it, and how surveyors prepare it.'
-  },
-  {
-    category: 'LAND SURVEY',
-    readTime: '4 MIN READ',
-    title: 'Documents you need before a land survey in Tamil Nadu',
-    excerpt: 'A surveyor cannot measure land effectively without the right paper trail. Learn exactly what documents (Patta, Chitta, Sale Deed) you must keep ready.'
-  },
-  {
-    category: 'PRICING',
-    readTime: '6 MIN READ',
-    title: 'How much does a land survey cost in Chennai?',
-    excerpt: 'A transparent breakdown of the costs involved in boundary fixing, topographical surveys, and sub-divisions, including total station daily rental rates.'
-  },
-  {
-    category: 'CONSTRUCTION',
-    readTime: '4 MIN READ',
-    title: 'Why manual column marking is costing builders lakhs',
-    excerpt: 'Tape measure layouts often result in column deviations. Discover why top builders have entirely shifted to Total Station column grid marking.'
-  }
-];
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides');
+const sortedGuides = allGuides.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <Layout title="Guides | GV Modern Surveyors">
@@ -56,15 +34,15 @@ const GUIDES = [
     <section style="background: var(--c-bg-alt); padding: 80px 0;">
       <div class="wrap" style="max-width: 1000px;">
         <div style="display: flex; flex-direction: column; gap: 24px;">
-          {GUIDES.map((guide) => (
-            <a href="#" class="guide-row">
+          {sortedGuides.map((guide) => (
+            <a href={`/guides/${guide.id}`} class="guide-row">
               <div class="guide-meta">
-                <span style="color: var(--c-gold);">{guide.category}</span>
-                <span>{guide.readTime}</span>
+                <span style="color: var(--c-gold);">{guide.data.category}</span>
+                <span>{guide.data.readTime}</span>
               </div>
               <div class="guide-content">
-                <h2 style="font-size: 24px; color: var(--c-paper); margin-bottom: 16px;">{guide.title}</h2>
-                <p style="color: var(--c-t2); font-size: 16px; line-height: 1.6;">{guide.excerpt}</p>
+                <h2 style="font-size: 24px; color: var(--c-paper); margin-bottom: 16px;">{guide.data.title}</h2>
+                <p style="color: var(--c-t2); font-size: 16px; line-height: 1.6;">{guide.data.excerpt}</p>
               </div>
               <div class="read-arr">→</div>
             </a>

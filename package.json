@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "process-blogs": "node scripts/process-docx.js"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.7",
@@ -23,5 +24,9 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "mammoth": "^1.12.0",
+    "turndown": "^7.2.4"
   }
 }
