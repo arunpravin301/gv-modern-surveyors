@@ -1,5 +1,5 @@
 ---
-title: "How much does a land survey cost in Chennai?"
+title: "How much does a topographic survey cost in Chennai?"
 excerpt: "A transparent breakdown of the costs involved in boundary fixing, topographical surveys, and sub-divisions, including total station daily rental rates."
 category: "PRICING"
 readTime: "6 MIN READ"
@@ -8,7 +8,7 @@ date: 2026-06-21
 
 One of the most common questions we get is: *"How much will it cost to survey my land?"*
 
-The truth is, land surveying is not a one-size-fits-all service. The cost depends entirely on the size of the land, the complexity of the terrain, and the specific type of survey required.
+The truth is, topographic surveying is not a one-size-fits-all service. The cost depends entirely on the size of the land, the complexity of the terrain, and the specific type of survey required.
 
 Here is a transparent breakdown of how we price our services at GV Modern Surveyors:
 

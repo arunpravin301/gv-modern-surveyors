@@ -1,12 +1,12 @@
 ---
-title: "Documents you need before a land survey in Tamil Nadu"
+title: "Documents you need before a topographic survey in Tamil Nadu"
 excerpt: "A surveyor cannot measure land effectively without the right paper trail. Learn exactly what documents (Patta, Chitta, Sale Deed) you must keep ready."
-category: "LAND SURVEY"
+category: "TOPOGRAPHIC SURVEY"
 readTime: "4 MIN READ"
 date: 2026-06-22
 ---
 
-A successful land survey starts long before the equipment reaches the site. It begins with the paperwork. Without the correct legal documents, a surveyor is essentially flying blind.
+A successful topographic survey starts long before the equipment reaches the site. It begins with the paperwork. Without the correct legal documents, a surveyor is essentially flying blind.
 
 Here is the essential checklist of documents you must provide your surveyor in Tamil Nadu:
 

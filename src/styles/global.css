@@ -161,6 +161,9 @@ a.technical-item:hover {
 .technical-item.third-item {
   grid-column: span 4;
 }
+.technical-item.quarter-item {
+  grid-column: span 3;
+}
 
 /* Dynamic Interaction for Technical Items */
 .technical-item::before {
@@ -190,13 +193,13 @@ a.technical-item:hover::after {
 }
 
 @media(max-width: 1024px) {
-  .technical-item.third-item {
+  .technical-item.third-item, .technical-item.quarter-item {
     grid-column: span 6;
   }
 }
 
 @media(max-width: 768px) {
-  .technical-item.half-item, .technical-item.third-item {
+  .technical-item.half-item, .technical-item.third-item, .technical-item.quarter-item {
     grid-column: span 12;
   }
 }
