@@ -14,6 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
+    $clean_phone = preg_replace('/[^0-9]/', '', $phone);
+    if (strlen($clean_phone) < 10 || strlen($clean_phone) > 15) {
+        http_response_code(400);
+        echo json_encode(["message" => "Please enter a valid phone number (10 to 15 digits)."]);
+        exit;
+    }
+
     $recipient = "gvmodernsurveyors2022@gmail.com";
     $subject = "New Website Enquiry from $name";
     
