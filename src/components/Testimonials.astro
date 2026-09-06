@@ -179,8 +179,12 @@
     var stage = document.getElementById('staggerStage');
     if (!stage) return;
   
-    var CARD_DEF = 365, CARD_SM = 290;
-    var cardSize = window.matchMedia('(min-width:640px)').matches ? CARD_DEF : CARD_SM;
+    var CARD_W_DEF = 365, CARD_W_SM = 290;
+    var CARD_H_DEF = 365, CARD_H_SM = 420; // taller on mobile for wrapping text
+    
+    var isDesk = window.matchMedia('(min-width:640px)').matches;
+    var cardW = isDesk ? CARD_W_DEF : CARD_W_SM;
+    var cardH = isDesk ? CARD_H_DEF : CARD_H_SM;
   
     var items = [
       {id:0, quote:'Despite tough challenges, Mr. Gopalakrishnan diligently visited the site on Sundays with his team and finished the as-built drawings before the committed timeline. A trustworthy surveying partner.', by:'Senthil Kumaran N.S, Raagavan Structural Designs', pending:false},
@@ -221,11 +225,11 @@
         var el    = nodes[itemIdx];
         var ty    = isCenter ? -65 : (pos % 2 ? 15 : -15);
         var rot   = isCenter ? 0   : (pos % 2 ? 2.5 : -2.5);
-        var tx    = (cardSize / 1.5) * pos;
+        var tx    = (cardW / 1.5) * pos;
         /* mutate class so CSS transitions fire (element stays in DOM) */
         el.className  = 'st-card ' + (isCenter ? 'is-center' : 'is-side');
-        el.style.width  = cardSize + 'px';
-        el.style.height = cardSize + 'px';
+        el.style.width  = cardW + 'px';
+        el.style.height = cardH + 'px';
         el.style.zIndex = isCenter ? "10" : "0";
         el.style.transform =
           'translate(-50%,-50%) ' +
@@ -249,8 +253,14 @@
     document.getElementById('stNext').addEventListener('click', function(){ move(1); });
   
     window.addEventListener('resize', function(){
-      var ns = window.matchMedia('(min-width:640px)').matches ? CARD_DEF : CARD_SM;
-      if (ns !== cardSize) { cardSize = ns; applyPositions(); }
+      var desk = window.matchMedia('(min-width:640px)').matches;
+      var nw = desk ? CARD_W_DEF : CARD_W_SM;
+      var nh = desk ? CARD_H_DEF : CARD_H_SM;
+      if (nw !== cardW || nh !== cardH) { 
+        cardW = nw; 
+        cardH = nh;
+        applyPositions(); 
+      }
     });
   
     applyPositions();
