@@ -74,53 +74,13 @@ import '../styles/global.css';
             </select>
             <textarea name="message" placeholder="Location, plot size, or specific details..." rows="4" class="br-input" style="resize: vertical;"></textarea>
             
-            <button id="emailSubmit" type="submit" style="width: 100%; background: var(--c-gold); color: var(--c-bg); font-family: var(--f-body); font-weight: 700; font-size: 16px; padding: 18px; border: none; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s;">
-              SEND ENQUIRY
+            <button id="waSubmit" type="button" style="width: 100%; background: var(--c-gold); color: var(--c-bg); font-family: var(--f-body); font-weight: 700; font-size: 16px; padding: 18px; border: none; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s;">
+              SEND VIA WHATSAPP
             </button>
-            <p id="formStatus" style="font-size: 13px; color: var(--c-t3); margin-top: 8px; text-align: center; height: 16px;">
-              We will contact you shortly.
+            <p style="font-size: 13px; color: var(--c-t3); margin-top: 8px; text-align: center;">
+              This will open WhatsApp with your details pre-filled.
             </p>
           </form>
-
-          <script>
-            const form = document.getElementById('contactForm') as HTMLFormElement;
-            const btn = document.getElementById('emailSubmit') as HTMLButtonElement;
-            const status = document.getElementById('formStatus') as HTMLParagraphElement;
-
-            if (form && btn && status) {
-              form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                
-                btn.textContent = 'SENDING...';
-                btn.style.opacity = '0.7';
-                btn.style.pointerEvents = 'none';
-
-                try {
-                  const response = await fetch('/api/contact.php', {
-                    method: 'POST',
-                    body: formData
-                  });
-                  const data = await response.json();
-                  
-                  if (response.ok) {
-                    status.textContent = '✅ Enquiry sent successfully! We will call you soon.';
-                    status.style.color = '#4ade80';
-                    form.reset();
-                  } else {
-                    throw new Error(data.message || 'Failed to send');
-                  }
-                } catch (err) {
-                  status.textContent = '❌ Failed to send. Please call us directly instead.';
-                  status.style.color = '#ef4444';
-                } finally {
-                  btn.textContent = 'SEND ENQUIRY';
-                  btn.style.opacity = '1';
-                  btn.style.pointerEvents = 'auto';
-                }
-              });
-            }
-          </script>
         </div>
 
       </div>
@@ -186,7 +146,14 @@ import '../styles/global.css';
         let text = 'Hi GV Modern Surveyors, I would like to enquire.%0A%0AName: ' + encodeURIComponent(n) + '%0APhone: ' + encodeURIComponent(p) + '%0AService: ' + encodeURIComponent(s);
         if (m) text += '%0ADetails: ' + encodeURIComponent(m);
         
+        // Silently send the data to the client's email in the background
+        fetch('/api/contact.php', {
+          method: 'POST',
+          body: new FormData(form)
+        }).catch(e => console.log('Email failed', e));
+
         window.open('https://wa.me/918072807474?text=' + text, '_blank');
+        form.reset();
       });
     }
   }
