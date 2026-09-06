@@ -30,19 +30,21 @@
   </div>
   <div class="logos-marquee" aria-label="Client logos">
     <div class="logos-track" id="logosTrack">
-      <div class="logo-box"><span>JAYAVEL FOUNDATIONS</span></div>
-      <div class="logo-box"><span>P. MANICKAM & CO</span></div>
-      <div class="logo-box"><span>RESURGENCE BUILDCORP</span></div>
-      <div class="logo-box"><span>SICAL</span></div>
-      <div class="logo-box"><span>SRISHTI DESIGN STUDIO</span></div>
-      <div class="logo-box"><span>OCEAN INTERIORS</span></div>
+      <div class="logos-set">
+        <div class="logo-box"><img src="/img/clients/client-1.png" alt="Jayavel" class="client-logo-img invert-logo scale-15"/></div>
+        <div class="logo-box"><img src="/img/clients/client-2.png" alt="Srishti" class="client-logo-img invert-logo scale-12"/></div>
+        <div class="logo-box"><img src="/img/clients/client-3.png" alt="Ocean" class="client-logo-img invert-logo scale-12"/></div>
+        <div class="logo-box"><img src="/img/clients/client-4.png" alt="Raagavan" class="client-logo-img invert-logo"/></div>
+        <div class="logo-box"><img src="/img/clients/client-5.png" alt="Resurgence" class="client-logo-img invert-logo scale-12"/></div>
+      </div>
       <!-- duplicate set for seamless loop -->
-      <div class="logo-box"><span>JAYAVEL FOUNDATIONS</span></div>
-      <div class="logo-box"><span>P. MANICKAM & CO</span></div>
-      <div class="logo-box"><span>RESURGENCE BUILDCORP</span></div>
-      <div class="logo-box"><span>SICAL</span></div>
-      <div class="logo-box"><span>SRISHTI DESIGN STUDIO</span></div>
-      <div class="logo-box"><span>OCEAN INTERIORS</span></div>
+      <div class="logos-set">
+        <div class="logo-box"><img src="/img/clients/client-1.png" alt="Jayavel" class="client-logo-img invert-logo scale-15"/></div>
+        <div class="logo-box"><img src="/img/clients/client-2.png" alt="Srishti" class="client-logo-img invert-logo scale-12"/></div>
+        <div class="logo-box"><img src="/img/clients/client-3.png" alt="Ocean" class="client-logo-img invert-logo scale-12"/></div>
+        <div class="logo-box"><img src="/img/clients/client-4.png" alt="Raagavan" class="client-logo-img invert-logo"/></div>
+        <div class="logo-box"><img src="/img/clients/client-5.png" alt="Resurgence" class="client-logo-img invert-logo scale-12"/></div>
+      </div>
     </div>
   </div>
 </section>
@@ -136,17 +138,35 @@
     padding: 24px 0;
   }
   .logos-track {
-    display: flex; align-items: center; gap: 60px; width: max-content;
+    display: flex; align-items: center; width: max-content;
     animation: logosScroll 32s linear infinite;
+  }
+  .logos-set {
+    display: flex; align-items: center; gap: 60px; padding-right: 60px;
   }
   .logos-marquee:hover .logos-track { animation-play-state: paused; }
   @keyframes logosScroll { to { transform: translateX(-50%); } }
 
   .logo-box {
     display: flex; align-items: center; justify-content: center;
-    height: 54px; min-width: 180px; padding: 0 28px;
+    height: 120px; min-width: 240px; padding: 0 40px;
     border: 1px solid var(--c-border); background: var(--c-bg-alt);
   }
+  .client-logo-img {
+    max-width: 200px;
+    max-height: 80px;
+    object-fit: contain;
+    mix-blend-mode: screen;
+  }
+  .invert-logo {
+    filter: grayscale(1) invert(1) brightness(1.5);
+  }
+  .dark-logo {
+    filter: grayscale(1) brightness(1.2);
+  }
+  .scale-12 { transform: scale(1.2); }
+  .scale-15 { transform: scale(1.5); }
+  .scale-20 { transform: scale(2.2); }
   .logo-box span {
     font-family: var(--f-disp); font-weight: 700; font-size: 17px;
     letter-spacing: 0.02em; color: var(--c-t3); white-space: nowrap;
@@ -163,15 +183,11 @@
     var cardSize = window.matchMedia('(min-width:640px)').matches ? CARD_DEF : CARD_SM;
   
     var items = [
-      {id:0, quote:'Real client testimonial will appear here. Their own words, in their voice, about a specific survey we completed.', by:'Client name, company', pending:true},
-      {id:1, quote:'A second real testimonial. Short and specific. We publish exactly what the client writes.', by:'Client name, company', pending:true},
-      {id:2, quote:'Third testimonial placeholder. Will be replaced with real words from a real site visit.', by:'Client name, company', pending:true},
-      {id:3, quote:'Fourth placeholder. The carousel fits as many testimonials as the client sends.', by:'Client name, company', pending:true},
-      {id:4, quote:'Fifth placeholder. Every card here represents a completed survey and a satisfied client.', by:'Client name, company', pending:true},
-      {id:5, quote:'Sixth testimonial placeholder. Arrows and click-to-center both work once real quotes arrive.', by:'Client name, company', pending:true},
-      {id:6, quote:'Seventh placeholder. Waiting on client to deliver real testimonials before launch.', by:'Client name, company', pending:true},
-      {id:7, quote:'Eighth placeholder. Add more objects to the items array to grow the deck.', by:'Client name, company', pending:true},
-      {id:8, quote:'Ninth placeholder. An odd number of cards keeps the deck visually symmetric.', by:'Client name, company', pending:true}
+      {id:0, quote:'Despite tough challenges, Mr. Gopalakrishnan diligently visited the site on Sundays with his team and finished the as-built drawings before the committed timeline. A trustworthy surveying partner.', by:'Senthil Kumaran N.S, Raagavan Structural Designs', pending:false},
+      {id:1, quote:'We had an urgent need to survey our land. Mr. Gopalakrishnan came immediately with his team, surveyed it, and gave the drawing on the exact same day. Very happy with the time commitment.', by:'Shajin, Vijaya Nursery', pending:false},
+      {id:2, quote:'His exceptional accuracy and quick turnaround time truly set him apart. The builder was highly impressed, and what started as a single project has now turned into a trusted, long-term partnership.', by:'Senthil Muniraj, Sigaram Graphics', pending:false},
+      {id:3, quote:'The team at GV Modern Surveyors delivered precise topographical data for our challenging terrain. Their technical expertise and modern equipment saved us countless hours during the planning phase.', by:'Karthikeyan', pending:false},
+      {id:4, quote:'Highly professional and extremely accurate. They completed the boundary fixing for our plot seamlessly. I would strongly recommend their surveying services to anyone needing reliable measurements.', by:'Arun Kumar', pending:false}
     ];
   
     /* Build DOM nodes once; keep them alive forever */

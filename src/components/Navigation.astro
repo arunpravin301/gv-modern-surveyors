@@ -3,9 +3,9 @@ const pathname = Astro.url.pathname;
 const currentPath = pathname.replace(/\/$/, ""); // remove trailing slash
 ---
 <header class="brutal-nav" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(11,20,26,0.9); backdrop-filter: blur(8px); border-bottom: 1px solid var(--c-border);">
-  <div class="wrap" style="height: 80px; display: flex; align-items: center; justify-content: space-between;">
-    <a href="/" style="display: flex; align-items: center; z-index: 102;">
-      <img src="/logo.png" alt="GV Modern Surveyors" style="height: clamp(32px, 5vw, 48px); object-fit: contain;" />
+  <div class="wrap" style="height: 120px; display: flex; align-items: center; justify-content: space-between;">
+    <a href="/" style="display: flex; align-items: center; z-index: 102; mix-blend-mode: screen;">
+      <img src="/img/logo2.jpg" alt="GV Modern Surveyors" style="height: clamp(80px, 12vw, 120px); object-fit: contain;" />
     </a>
 
     <!-- Desktop Navigation -->
