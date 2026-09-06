@@ -56,7 +56,7 @@ import '../styles/global.css';
         <div style="padding: 80px 0 80px 4vw;">
           <div class="mono" style="color: var(--c-gold); margin-bottom: 24px;">/ DIRECT ENQUIRY</div>
           
-          <form id="contactForm" onsubmit="event.preventDefault();" style="display: flex; flex-direction: column; gap: 16px;">
+          <form id="contactForm" style="display: flex; flex-direction: column; gap: 16px;">
             <input type="text" name="name" placeholder="Your Name" required class="br-input" />
             <input type="tel" name="phone" placeholder="Phone Number" required class="br-input" />
             <select name="service" required class="br-input" style="cursor: pointer; appearance: none;">
@@ -74,13 +74,53 @@ import '../styles/global.css';
             </select>
             <textarea name="message" placeholder="Location, plot size, or specific details..." rows="4" class="br-input" style="resize: vertical;"></textarea>
             
-            <button id="waSubmit" type="submit" style="width: 100%; background: var(--c-gold); color: var(--c-bg); font-family: var(--f-body); font-weight: 700; font-size: 16px; padding: 18px; border: none; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s;">
-              SEND VIA WHATSAPP
+            <button id="emailSubmit" type="submit" style="width: 100%; background: var(--c-gold); color: var(--c-bg); font-family: var(--f-body); font-weight: 700; font-size: 16px; padding: 18px; border: none; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s;">
+              SEND ENQUIRY
             </button>
-            <p style="font-size: 13px; color: var(--c-t3); margin-top: 8px; text-align: center;">
-              This will open WhatsApp with your details pre-filled.
+            <p id="formStatus" style="font-size: 13px; color: var(--c-t3); margin-top: 8px; text-align: center; height: 16px;">
+              We will contact you shortly.
             </p>
           </form>
+
+          <script>
+            const form = document.getElementById('contactForm') as HTMLFormElement;
+            const btn = document.getElementById('emailSubmit') as HTMLButtonElement;
+            const status = document.getElementById('formStatus') as HTMLParagraphElement;
+
+            if (form && btn && status) {
+              form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                
+                btn.textContent = 'SENDING...';
+                btn.style.opacity = '0.7';
+                btn.style.pointerEvents = 'none';
+
+                try {
+                  const response = await fetch('/api/contact.php', {
+                    method: 'POST',
+                    body: formData
+                  });
+                  const data = await response.json();
+                  
+                  if (response.ok) {
+                    status.textContent = '✅ Enquiry sent successfully! We will call you soon.';
+                    status.style.color = '#4ade80';
+                    form.reset();
+                  } else {
+                    throw new Error(data.message || 'Failed to send');
+                  }
+                } catch (err) {
+                  status.textContent = '❌ Failed to send. Please call us directly instead.';
+                  status.style.color = '#ef4444';
+                } finally {
+                  btn.textContent = 'SEND ENQUIRY';
+                  btn.style.opacity = '1';
+                  btn.style.pointerEvents = 'auto';
+                }
+              });
+            }
+          </script>
         </div>
 
       </div>
