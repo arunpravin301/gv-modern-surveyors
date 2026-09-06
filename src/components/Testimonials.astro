@@ -111,7 +111,8 @@
   /* Using global styling because JS will inject these classes */
   :global(.st-card) {
     position: absolute; left: 50%; top: 50%;
-    width: 365px; height: 365px;
+    width: 365px; /* overridden by JS width */
+    display: flex; flex-direction: column;
     cursor: pointer; border: 2px solid; padding: 32px;
     clip-path: polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0);
     transition: transform 500ms ease-in-out, background 500ms ease-in-out, border-color 500ms ease-in-out, box-shadow 500ms ease-in-out, color 500ms ease-in-out;
@@ -134,7 +135,7 @@
   :global(.st-card.is-side .cut) { background: var(--c-border); }
 
   :global(.st-card .av-init) {
-    width: 48px; height: 56px; margin-bottom: 16px;
+    width: 48px; height: 56px; margin-bottom: 16px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     font-family: var(--f-disp); font-weight: 800; font-size: 18px;
     transition: background 500ms ease-in-out, color 500ms ease-in-out;
@@ -145,8 +146,8 @@
   :global(.st-card .qt) { font-size: 18px; font-weight: 500; line-height: 1.42; margin: 0; }
   
   :global(.st-card .by-line) {
-    position: absolute; bottom: 32px; left: 32px; right: 32px;
-    font-size: 13px; font-style: italic; margin: 0;
+    margin: 0; margin-top: 24px;
+    font-size: 13px; font-style: italic;
   }
   :global(.st-card.is-center .by-line) { color: var(--c-t3); }
   :global(.st-card.is-side .by-line) { color: var(--c-t2); }
@@ -219,11 +220,9 @@
     if (!stage) return;
   
     var CARD_W_DEF = 365, CARD_W_SM = 290;
-    var CARD_H_DEF = 365, CARD_H_SM = 420; // taller on mobile for wrapping text
     
     var isDesk = window.matchMedia('(min-width:640px)').matches;
     var cardW = isDesk ? CARD_W_DEF : CARD_W_SM;
-    var cardH = isDesk ? CARD_H_DEF : CARD_H_SM;
   
     var items = [
       {id:0, quote:'Despite tough challenges, Mr. Gopalakrishnan diligently visited the site on Sundays with his team and finished the as-built drawings before the committed timeline. A trustworthy surveying partner.', by:'Senthil Kumaran N.S, Raagavan Structural Designs', pending:false},
@@ -268,7 +267,6 @@
         /* mutate class so CSS transitions fire (element stays in DOM) */
         el.className  = 'st-card ' + (isCenter ? 'is-center' : 'is-side');
         el.style.width  = cardW + 'px';
-        el.style.height = cardH + 'px';
         el.style.zIndex = isCenter ? "10" : "0";
         el.style.transform =
           'translate(-50%,-50%) ' +
@@ -294,10 +292,8 @@
     window.addEventListener('resize', function(){
       var desk = window.matchMedia('(min-width:640px)').matches;
       var nw = desk ? CARD_W_DEF : CARD_W_SM;
-      var nh = desk ? CARD_H_DEF : CARD_H_SM;
-      if (nw !== cardW || nh !== cardH) { 
+      if (nw !== cardW) { 
         cardW = nw; 
-        cardH = nh;
         applyPositions(); 
       }
     });
