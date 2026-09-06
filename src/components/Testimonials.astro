@@ -47,6 +47,15 @@
       </div>
     </div>
   </div>
+  
+  <div class="inner" style="margin-top: 80px;">
+    <p class="logos-label">OFFICIAL APPRECIATION</p>
+    <div class="testi-grid">
+      <div class="testi-doc"><img src="/img/testimonials/doc-1.png" alt="Testimonial Document 1"/></div>
+      <div class="testi-doc"><img src="/img/testimonials/doc-2.png" alt="Testimonial Document 2"/></div>
+      <div class="testi-doc"><img src="/img/testimonials/doc-3.png" alt="Testimonial Document 3"/></div>
+    </div>
+  </div>
 </section>
 
 <style>
@@ -65,6 +74,36 @@
     border-top: 1px solid var(--c-border);
     border-bottom: 1px solid var(--c-border);
     margin-top: 40px;
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 24px;
+  }
+  .testi-doc {
+    position: relative;
+    border: 1px solid var(--c-border);
+    padding: 16px;
+    background: var(--c-bg-alt);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .testi-doc:hover {
+    transform: translateY(-4px);
+    border-color: var(--c-gold);
+  }
+  .testi-doc img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(1);
+    opacity: 0.8;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
+  .testi-doc:hover img {
+    filter: grayscale(0);
+    opacity: 1;
   }
   .stagger-stage { position: absolute; inset: 0; }
 
