@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.gvmodernsurveyors.in/sitemap-index.xml

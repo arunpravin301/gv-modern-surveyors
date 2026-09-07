@@ -1,0 +1,9 @@
+open 217.21.90.96
+u615813519
+9:+7Uh1VE8b~=P?r
+pwd
+ls
+cd public_html
+pwd
+ls
+quit
