@@ -153,9 +153,18 @@ const schema = {
   if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
     
-    // Only animate if not already animated by global logic, 
-    // or just rely on the global layout gsap animation. 
-    // We'll let Layout.astro's global script handle data-gsap="fade-up" 
-    // but we can add specific logic here if needed.
+    const fadeEls = gsap.utils.toArray('[data-gsap="fade-up"]');
+    fadeEls.forEach((el: any) => {
+      gsap.to(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+    });
   }
 </script>
