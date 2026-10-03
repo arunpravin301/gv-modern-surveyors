@@ -1,0 +1,161 @@
+---
+const faqs = [
+  {
+    question: "What is a topographical survey?",
+    answer: "A topographical survey maps the physical features of a property, including boundaries, elevations, trees, and existing structures. It is essential for architects, engineers, and builders before starting any construction project."
+  },
+  {
+    question: "How much does a land survey cost in India?",
+    answer: "The cost of a land survey depends on the size of the property, the complexity of the terrain, and the type of survey required (e.g., FMB verification vs. DGPS). Contact us with your property details for a precise, customized quote."
+  },
+  {
+    question: "What is an FMB sketch?",
+    answer: "An FMB (Field Measurement Book) sketch is a government record that outlines the exact dimensions and boundaries of a specific land parcel. We provide precise FMB drawing works to resolve boundary disputes and ensure legal compliance."
+  },
+  {
+    question: "How long does a typical land survey take?",
+    answer: "Most residential and small commercial surveys can be completed in 1 to 2 days of field operations, followed by 1 to 3 days for data processing and drawing delivery. Large-scale projects may take longer."
+  },
+  {
+    question: "Why use DGPS surveying over traditional methods?",
+    answer: "Differential Global Positioning System (DGPS) surveying offers millimeter-level accuracy over vast distances in a fraction of the time. It is highly precise, reducing human error and providing reliable data for critical infrastructure projects."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<section class="faq-section section-padding">
+  <div class="container">
+    <div class="faq-header" data-gsap="fade-up">
+      <p class="overline-text">Knowledge Base</p>
+      <h2 class="h2">Frequently Asked <span class="text-accent">Questions</span>.</h2>
+      <p class="body-text opacity-70">Answers to the most common queries about our surveying operations and processes.</p>
+    </div>
+
+    <div class="faq-grid">
+      {faqs.map((faq, index) => (
+        <details class="faq-item" data-gsap="fade-up" style={`--delay: ${index * 0.1}s`}>
+          <summary class="faq-question">
+            <h3 class="h4">{faq.question}</h3>
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p class="body-text opacity-70">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+  
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>
+
+<style>
+  .faq-section {
+    background-color: var(--c-bg);
+    color: var(--c-paper);
+    padding: 8rem 0;
+  }
+  
+  .faq-header {
+    margin-bottom: 4rem;
+    max-width: 600px;
+  }
+  
+  .faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .faq-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    list-style: none; /* Hide default arrow */
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none; /* Hide default arrow in Safari */
+  }
+  
+  .faq-question h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    padding-right: 1rem;
+  }
+  
+  .faq-icon {
+    font-size: 1.5rem;
+    color: var(--c-accent);
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+  
+  details[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+  
+  .faq-answer {
+    padding: 0 2rem 1.5rem 2rem;
+    animation: slideDown 0.3s ease-out forwards;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  [data-gsap="fade-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Only animate if not already animated by global logic, 
+    // or just rely on the global layout gsap animation. 
+    // We'll let Layout.astro's global script handle data-gsap="fade-up" 
+    // but we can add specific logic here if needed.
+  }
+</script>
