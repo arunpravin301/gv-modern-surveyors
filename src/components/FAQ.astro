@@ -36,26 +36,40 @@ const schema = {
 };
 ---
 
-<section class="faq-section section-padding">
-  <div class="container">
-    <div class="faq-header" data-gsap="fade-up">
-      <p class="overline-text">Knowledge Base</p>
-      <h2 class="h2">Frequently Asked <span class="text-accent">Questions</span>.</h2>
-      <p class="body-text opacity-70">Answers to the most common queries about our surveying operations and processes.</p>
-    </div>
+<section class="faq-section" style="padding: 130px 0; background: var(--c-bg); border-top: 1px solid var(--c-border); position: relative;">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 4vw;">
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8vw;">
+      
+      <!-- Left side: Header -->
+      <div class="faq-header" data-gsap="fade-up">
+        <div class="mono" style="color: var(--c-gold); margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+          / 05 KNOWLEDGE BASE
+          <span style="display: block; width: 80px; height: 1px; background: var(--c-border);"></span>
+        </div>
+        <h2 style="font-family: var(--f-disp); font-size: clamp(32px, 4vw, 56px); color: var(--c-paper); line-height: 1.1; margin-bottom: 24px; font-weight: 700;">
+          Frequently Asked <br/><span style="color: var(--c-t3);">Questions.</span>
+        </h2>
+        <p style="color: var(--c-t2); font-size: 17px; max-width: 40ch; line-height: 1.6;">
+          Clear, concise answers to the most common queries about our field surveying operations, timelines, and technical processes.
+        </p>
+      </div>
 
-    <div class="faq-grid">
-      {faqs.map((faq, index) => (
-        <details class="faq-item" data-gsap="fade-up" style={`--delay: ${index * 0.1}s`}>
-          <summary class="faq-question">
-            <h3 class="h4">{faq.question}</h3>
-            <span class="faq-icon">+</span>
-          </summary>
-          <div class="faq-answer">
-            <p class="body-text opacity-70">{faq.answer}</p>
-          </div>
-        </details>
-      ))}
+      <!-- Right side: Accordion -->
+      <div class="faq-grid">
+        {faqs.map((faq, index) => (
+          <details class="faq-item" data-gsap="fade-up">
+            <summary class="faq-question">
+              <h3 style="font-family: var(--f-disp); font-size: 20px; font-weight: 600; color: var(--c-paper); margin: 0;">{faq.question}</h3>
+              <span class="faq-icon" style="color: var(--c-gold); font-family: var(--f-mono); font-size: 24px; line-height: 1; font-weight: normal;">+</span>
+            </summary>
+            <div class="faq-answer">
+              <p style="color: var(--c-t2); font-size: 16px; line-height: 1.6; margin: 0;">{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
     </div>
   </div>
   
@@ -63,42 +77,27 @@ const schema = {
 </section>
 
 <style>
-  .faq-section {
-    background-color: var(--c-bg);
-    color: var(--c-paper);
-    padding: 8rem 0;
-  }
-  
-  .faq-header {
-    margin-bottom: 4rem;
-    max-width: 600px;
-  }
-  
   .faq-grid {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
+    gap: 16px;
   }
   
   .faq-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: background 0.3s ease;
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    transition: border-color 0.3s ease;
   }
   
   .faq-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(224, 165, 38, 0.3); /* faint gold */
   }
   
   .faq-question {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 24px 32px;
     cursor: pointer;
     list-style: none; /* Hide default arrow */
   }
@@ -107,25 +106,21 @@ const schema = {
     display: none; /* Hide default arrow in Safari */
   }
   
-  .faq-question h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    padding-right: 1rem;
-  }
-  
   .faq-icon {
-    font-size: 1.5rem;
-    color: var(--c-accent);
-    font-weight: bold;
     transition: transform 0.3s ease;
   }
   
+  details[open] .faq-item {
+    border-color: var(--c-gold);
+  }
+
   details[open] .faq-icon {
     transform: rotate(45deg);
+    color: var(--c-paper) !important;
   }
   
   .faq-answer {
-    padding: 0 2rem 1.5rem 2rem;
+    padding: 0 32px 32px 32px;
     animation: slideDown 0.3s ease-out forwards;
   }
   
@@ -143,6 +138,19 @@ const schema = {
   [data-gsap="fade-up"] {
     opacity: 0;
     transform: translateY(30px);
+  }
+
+  @media(max-width: 900px) {
+    div[style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    .faq-question {
+      padding: 20px 24px;
+    }
+    .faq-answer {
+      padding: 0 24px 24px 24px;
+    }
   }
 </style>
 
